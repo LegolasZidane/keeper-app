@@ -1,76 +1,68 @@
-import React, { useState } from "react"; 
-import AddIcon from "@mui/icons-material/Add"; 
-import Fab from "@mui/material/Fab"; 
-import Zoom from "@mui/material/Zoom"; 
+import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import { Fab } from "@mui/material";
+import { Zoom } from "@mui/material";
 
-function CreateArea(props) { 
+function CreateArea(props) {
+  const [isExpanded, setExpanded] = useState(false);
 
-  const [note, setNote] = useState({ 
-    title: "", 
-    content: "", 
-  }); 
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+  });
 
-  const [start, setStart] = useState(false); 
+  function handleChange(event) {
+    const { name, value } = event.target;
 
-  function handleChange(event) { 
+    setNote((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value,
+      };
+    });
+  }
 
-    const { name, value } = event.target; 
+  function submitNote(event) {
+    props.onAdd(note);
+    setNote({
+      title: "",
+      content: "",
+    });
+    event.preventDefault();
+  }
 
-    setNote((prevNote) => { 
-      return { 
-        ...prevNote, 
-        [name]: value, 
-      }; 
-    }); 
-  } 
+  function expand() {
+    setExpanded(true);
+  }
 
-  function submitNote(event) { 
+  return (
+    <div>
+      <form className="create-note">
+        {isExpanded && (
+          <input
+            name="title"
+            onChange={handleChange}
+            value={note.title}
+            placeholder="Title"
+          />
+        )}
 
-    props.onAdd(note); 
-    setNote({ 
-      title: "", 
-      content: "", 
-    }); 
+        <textarea
+          name="content"
+          onClick={expand}
+          onChange={handleChange}
+          value={note.content}
+          placeholder="Take a note..."
+          rows={isExpanded ? 3 : 1}
+        />
+        <Zoom in={isExpanded}>
+          <Fab onClick={submitNote}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
+      </form>
+    </div>
+  );
+}
 
-    changeStart(); 
-    event.preventDefault(); 
-  } 
-
-  function changeStart() { 
-    setStart((prevValue) => { 
-      return !prevValue; 
-    }); 
-  } 
-
-  return ( 
-    <div> 
-      <form className="create-note"> 
-        {start && ( 
-          <input 
-            name="title" 
-            onChange={handleChange} 
-            value={note.title} 
-            placeholder="Title" 
-          /> 
-        )} 
-
-        <textarea 
-          name="content" 
-          onClick={note.title === "" && changeStart} 
-          onChange={handleChange} 
-          value={note.content} 
-          placeholder="Take a note..." 
-          rows={start ? "3" : "1"} 
-        /> 
-
-        <Zoom in={start}> 
-          <Fab onClick={submitNote}> 
-            <AddIcon /> 
-          </Fab> 
-        </Zoom> 
-      </form> 
-    </div> 
-  ); 
-} 
-
-export default CreateArea; 
+export default CreateArea;
