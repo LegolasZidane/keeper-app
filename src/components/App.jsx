@@ -21,6 +21,12 @@ function App() {
     });
   }
 
+  function editNote(id) {
+
+    
+
+  }
+
   return (
     <div>
       <Header />
@@ -33,6 +39,7 @@ function App() {
             title={noteItem.title}
             content={noteItem.content}
             onDelete={deleteNote}
+            onEdit={editNote}
           />
         );
       })}

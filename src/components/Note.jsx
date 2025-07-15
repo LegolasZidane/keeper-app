@@ -1,9 +1,11 @@
 import React from "react"; 
 import DeleteIcon from "@mui/icons-material/Delete"; 
+import EditIcon from '@mui/icons-material/Edit';
 
 function Note(props) { 
   function handleClick() { 
     props.onDelete(props.id); 
+    props.onEdit(props.id);
   } 
   return ( 
     <div className="note"> 
@@ -11,6 +13,9 @@ function Note(props) {
       <p>{props.content}</p> 
       <button onClick={handleClick}> 
         <DeleteIcon /> 
+      </button>
+      <button onClick={handleClick}> 
+        <EditIcon /> 
       </button> 
     </div> 
   ); 
