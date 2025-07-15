@@ -9,6 +9,7 @@ function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
     content: "",
+    isEditing: false
   });
 
   function handleChange(event) {
@@ -27,6 +28,7 @@ function CreateArea(props) {
     setNote({
       title: "",
       content: "",
+      isEditing: false
     });
     event.preventDefault();
   }

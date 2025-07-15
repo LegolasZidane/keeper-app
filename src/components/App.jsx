@@ -23,8 +23,17 @@ function App() {
 
   function editNote(id) {
 
-    
+    setNotes(prevNotes => {
+      return prevNotes.map((noteItem, index) => ( index === id ? { ...noteItem, isEditing: true} : noteItem));
+    });
 
+  }
+
+  function addEditedNote(editedNote, id) {
+    console.log(editedNote);
+    setNotes(prevNotes => {
+      return prevNotes.map((notes, index) => ( index === id ? { ...editedNote, isEditing: false} : notes));
+    });
   }
 
   return (
@@ -38,8 +47,10 @@ function App() {
             id={index}
             title={noteItem.title}
             content={noteItem.content}
+            edit={noteItem.isEditing}
             onDelete={deleteNote}
             onEdit={editNote}
+            onComplete={addEditedNote}
           />
         );
       })}
