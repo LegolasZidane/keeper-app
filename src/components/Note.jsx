@@ -49,11 +49,11 @@ function Note(props) {
       <input className="title" name="title" onChange={handleChange} type="text" hidden={!props.edit} value={note.title}/>
       <textarea className="content" name="content" onChange={handleChange} hidden={!props.edit} value={note.content}></textarea> 
       
-      <button className="button" onClick={editClick} hidden={props.edit}> 
-        <EditIcon /> 
-      </button>
       <button className="button" onClick={deleteClick} hidden={props.edit}> 
         <DeleteIcon /> 
+      </button>
+      <button className="button" onClick={editClick} hidden={props.edit}> 
+        <EditIcon /> 
       </button>
       <button className="button" onClick={doneClick} hidden={!props.edit}> 
         <DoneIcon /> 
