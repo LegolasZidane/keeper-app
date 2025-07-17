@@ -75,6 +75,7 @@ footer p {
 }
 
 .note .title, .note .content {
+  outline: none;
   border: none;
 }
 
