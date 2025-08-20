@@ -6,7 +6,7 @@ function Header() {
   return ( 
     <header> 
       <h1> 
-        <HighlightIcon></HighlightIcon>Keeper 
+        <HighlightIcon></HighlightIcon>Pinz 
       </h1> 
     </header> 
   ); 
